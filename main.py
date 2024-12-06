@@ -1,11 +1,27 @@
+import os
+
+# Redirect subprocess outputs to null
+os.environ["PYTHONWARNINGS"] = "ignore"
+os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
+
 import psutil
-import GPUtil
+from py3nvml.py3nvml import *
 import tkinter as tk
 from tkinter import ttk
 import threading
 import time
 
-
+def get_gpu_data():
+    try:
+        nvmlInit()
+        handle = nvmlDeviceGetHandleByIndex(0)  #1 GPU
+        utilization = nvmlDeviceGetUtilizationRates(handle)
+        temperature = nvmlDeviceGetTemperature(handle, NVML_TEMPERATURE_GPU)
+        nvmlShutdown()
+        return utilization.gpu, temperature
+    except:
+        return 0, None
+    
 def update_stats_thread():
     prev_net = psutil.net_io_counters()
     while True:
@@ -27,9 +43,7 @@ def update_stats_thread():
         prev_net = net
 
         # GPU usage and temperature
-        gpus = GPUtil.getGPUs()
-        gpu_percent = gpus[0].load * 100 if gpus else 0
-        gpu_temp = gpus[0].temperature if gpus else None
+        gpu_percent, gpu_temp = get_gpu_data()
 
         # Update the GUI using the `update_gui` function
         root.after(0, update_gui, cpu_percent, ram_percent, cpu_temp, gpu_percent, gpu_temp, download_speed, upload_speed)
@@ -95,6 +109,8 @@ def do_move(event):
 
 # Create the main window
 root = tk.Tk()
+root.wm_attributes("-toolwindow", True)
+root.update_idletasks()
 root.title("Monix - Resource Monitor")
 root.geometry("400x450")
 root.configure(bg="#2C2F33")  
