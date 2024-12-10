@@ -1,4 +1,5 @@
 import os
+import sys
 import winreg as reg
 import tkinter as tk
 from tkinter import messagebox
@@ -7,7 +8,10 @@ def add_to_startup():
     """
     Adds Monix to the Windows startup programs by creating a registry entry.
     """
-    exe_path = os.path.abspath(__file__)  # Get the full path of the current file
+    exe_path = os.path.abspath(sys.argv[0])  # Path of the .exe or script
+    if exe_path.endswith(".py"):
+        exe_path = exe_path.replace(".py", ".exe")  # Ensure it's the .exe version
+
     key = r"Software\Microsoft\Windows\CurrentVersion\Run"
     app_name = "Monix"
 
@@ -20,6 +24,7 @@ def add_to_startup():
         print(f"{app_name} successfully added to startup.")
     except Exception as e:
         print(f"Error adding to startup: {e}")
+
 
 
 def ask_startup():
