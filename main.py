@@ -4,12 +4,18 @@ import os
 os.environ["PYTHONWARNINGS"] = "ignore"
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 
+from startup import ask_startup
+
+# Ask User to enable autoplay on Windows startup
+ask_startup()
+
 import psutil
 from py3nvml.py3nvml import *
 import tkinter as tk
 from tkinter import ttk
 import threading
 import time
+
 
 def get_gpu_data():
     try:
@@ -73,7 +79,7 @@ def update_gui(cpu, ram, cpu_temp, gpu, gpu_temp, download, upload):
         gpu_label.config(text=f"GPU: {gpu:.2f}%")
         gpu_bar['value'] = gpu
     else:
-        gpu_label.config(text="GPU: No GPU")
+        gpu_label.config(text="GPU: 0%")
         gpu_bar['value'] = 0
 
     # Update GPU Temperature
@@ -84,7 +90,17 @@ def update_gui(cpu, ram, cpu_temp, gpu, gpu_temp, download, upload):
         gpu_temp_label.pack_forget()  
 
     # Update Network
-    net_label.config(text=f"Net: ↓ {download:.2f} KB/s ↑ {upload:.2f} KB/s")
+    if download >= 1024:
+       download_text = f"{download / 1024:.2f} MB/s"
+    else:
+       download_text = f"{download:.2f} KB/s"
+
+    if upload >= 1024:
+       upload_text = f"{upload / 1024:.2f} MB/s"
+    else:
+       upload_text = f"{upload:.2f} KB/s"
+
+    net_label.config(text=f"Net: ↓ {download_text} ↑ {upload_text}")
 
 
 def close_app():
