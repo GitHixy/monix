@@ -1,25 +1,26 @@
-# File e directory generati da PyInstaller
+
 /build/
 *.spec
+requirements.txt
 
-# File di cache di Python
+
 __pycache__/
 *.py[cod]
 
-# Ambienti virtuali
+
 venv/
 env/
 
-# File di log
+
 *.log
 
-# File di configurazione dell'IDE
+
 .idea/
 .vscode/
 
-# File temporanei del sistema operativo
+
 .DS_Store
 Thumbs.db
 
-# Mantieni dist per le versioni scaricabili
+
 !dist/

@@ -1,3 +1,0 @@
-﻿psutil
-py3nvml
-pillow
