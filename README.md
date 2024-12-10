@@ -17,6 +17,7 @@
 - **Minimal interface**: Simple, modern, and clean overlay.
 - **Draggable overlay**: Place Monix anywhere on your screen.
 - **Ready to use**: No installation required, just run the `exe`.
+- **AutoRun**: Enable to let it run at Windows startup (from v1.0.1).
 
 ---
 
@@ -30,11 +31,13 @@
 ## 🚀 Installation and Usage
 
 1. **Download the latest version of Monix**:  
-   👉 **[Download Monix here](https://github.com/GitHixy/monix/blob/main/dist/Monix%20v1.0.0.exe)** 👈
+   👉 **[Download Monix here](https://github.com/GitHixy/monix/blob/main/dist)** 👈
    
-2. Run the **Monix v1.0.0.exe** file.
+2. Run the **Monix.exe** file.
 
 
 ---
+
+**Always run the latest version to get all fixes ad updates**
 
 
