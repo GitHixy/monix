@@ -4,6 +4,25 @@ import winreg as reg
 import tkinter as tk
 from tkinter import messagebox
 
+def is_in_startup():
+    """
+    Checks if Monix is already set to start with Windows.
+    """
+    key = r"Software\Microsoft\Windows\CurrentVersion\Run"
+    app_name = "Monix"
+    
+    try:
+        # Open the registry key for reading
+        reg_key = reg.OpenKey(reg.HKEY_CURRENT_USER, key, 0, reg.KEY_READ)
+        value, _ = reg.QueryValueEx(reg_key, app_name)
+        reg.CloseKey(reg_key)
+        return value is not None  # Return True if the key exists
+    except FileNotFoundError:
+        return False  # Return False if the key does not exist
+    except Exception as e:
+        print(f"Error checking startup key: {e}")
+        return False
+
 def add_to_startup():
     """
     Adds Monix to the Windows startup programs by creating a registry entry.
@@ -25,12 +44,15 @@ def add_to_startup():
     except Exception as e:
         print(f"Error adding to startup: {e}")
 
-
-
 def ask_startup():
     """
-    Asks the user if they want Monix to start automatically with Windows.
+    Asks the user if they want Monix to start automatically with Windows,
+    only if it's not already in the startup.
     """
+    if is_in_startup():
+        print("Monix is already set to start with Windows.")
+        return  # Exit the function if the key already exists
+
     def on_yes():
         add_to_startup()
         messagebox.showinfo("Monix", "Monix has been added to startup.")
@@ -62,4 +84,5 @@ def ask_startup():
     no_button.pack(side="right", padx=(10, 40), pady=(20, 10))
 
     root.mainloop()
+
 
