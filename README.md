@@ -2,67 +2,100 @@
 
 ![Monix Icon](monix.ico)
 
-**Monix** is a lightweight and modern application for real-time monitoring of system resources. Perfect for a clean and functional overlay of CPU, RAM, GPU, and network usage.
+**Monix** is a lightweight, modern always‑on‑top desktop overlay for real‑time monitoring of key system resources.
 
 ---
 
-## 📋 Features
+## 📦 Latest Release
 
-- **Real-time monitoring**:
-  - **CPU**: Usage and temperature.
-  - **RAM**: Usage percentage.
-  - **GPU**: Load and temperature (NVIDIA GPUs supported).
-  - **Network**: Download and upload speeds.
-    
-- **Minimal interface**: Simple, modern, and clean overlay.
-- **Draggable overlay**: Place Monix anywhere on your screen.
-- **Ready to use**: No installation required, just run the `exe`.
-- **AutoRun**: Enable to let it run at Windows startup (from v1.0.1).
+Current version: **v1.0.3**  
+Download: **[Monix v1.0.3 (EXE)](https://github.com/GitHixy/monix/blob/main/Dist/Monix%20v1.0.3.exe)**
+
+(Older builds remain in `dist/` for reference.)
+
+---
+
+## ✨ What's New in v1.0.3
+- Redesigned compact overlay UI (dark modern theme).
+- Always-on-top frameless window, now draggable from header.
+- Smooth ring gauges for CPU, RAM, GPU, VRAM (anti‑aliased via Pillow).
+- GPU + VRAM metrics (persistent NVML handle for reduced overhead).
+- Disk card: all drives listed with usage bar, percent, and size on separate lines.
+- Network card: download & upload shown separately (Mb/s, smoothed).
+- System card: CPU temp, GPU temp, uptime, process/thread summary, battery status.
+- Smoother updates with EMA filtering; minimized redraw to reduce stutter.
+- Footer height & layout adjustments to prevent text cutoff.
+- Gear (⚙) settings button.
+- Shorter process/thread summary text to avoid truncation.
+
+---
+
+## 📋 Feature Overview
+
+- CPU, RAM, GPU load, VRAM usage
+- Disk usage (all mounted disks)
+- Network throughput (↓ / ↑ Mb/s)
+- Temperatures (CPU / GPU when available)
+- Processes & thread counts (summary)
+- Optional Windows startup integration
 
 ---
 
 ## 🔧 Requirements
-
-- **Windows 10/11**
-- NVIDIA GPU (for GPU monitoring and temperature)
-
----
-
-## 🚀 Installation and Usage
-
-1. **Download the latest version of Monix**:  
-   👉 **[Download Monix here](https://github.com/GitHixy/monix/blob/main/dist)** 👈
-   
-2. Run the **Monix.exe** file.
-
+- Windows 10 / 11
+- NVIDIA GPU (for GPU + VRAM metrics & temperature)
+- (Optional) Battery & sensors support for related info
 
 ---
 
-**Always run the latest version to get all fixes ad updates**
+## 🚀 Usage
+1. Download the latest EXE from the link above.
+2. Run `Monix v1.0.3.exe` (no installation required).
+3. Drag by the header to position. Use ⚙ for options (startup toggle / quit).
+4. Press `Esc` to quit quickly.
 
-## 🛡️ Adding Monix to Windows Defender Exclusions
+Place the EXE somewhere stable if enabling startup.
 
-If Windows Defender flags Monix as a potential threat, you can add it to the exclusions list to prevent it from being mistakenly removed.
-This is caused because Monix can create a key in your registry that will allow the app to run on Windows Startup and that is a common case of false positive.
+---
 
-### Steps to Add Monix to Windows Defender Exclusions:
+## 🔄 Auto Run at Startup
+Use the in‑app settings (⚙ -> Toggle Startup). This adds/removes a registry entry in `HKCU:Software\Microsoft\Windows\CurrentVersion\Run`.
 
-1. Open **Windows Security**:
-   - Press `Win + S` and search for **Windows Security**.
-   - Click on **Virus & Threat Protection**.
+---
 
-2. Scroll down to **Virus & Threat Protection Settings** and click **Manage Settings**.
+## 🛡️ Windows Defender False Positives
+Because Monix can register itself for startup, some AV engines may flag it. If needed, add the EXE to Windows Security exclusions:
+1. Windows Security → Virus & Threat Protection
+2. Manage Settings → Exclusions → Add or Remove
+3. Add an Exclusion → File → select the Monix EXE.
 
-3. Scroll to the bottom and click **Add or Remove Exclusions** under **Exclusions**.
+---
 
-4. Click **Add an Exclusion** and choose **File**.
+## ❓ FAQ
+Q: Why is GPU data blank?  
+A: Ensure you have an NVIDIA GPU + latest drivers. NVML is required.
 
-5. Browse to the location of the Monix executable:
-   - For example: `C:\Path\To\Monix.exe`.
+Q: Does it support per‑core CPU?  
+A: Removed intentionally for a cleaner, lighter UI.
 
-6. Select the file and confirm.
+Q: Can I resize the window?  
+A: Not in this version; size is optimized for readability & compactness.
 
-Monix should now run without being flagged or removed by Windows Defender. If you encounter any issues, please let us know!
+---
+
+## 🗺️ Roadmap Ideas
+- Optional minimal mode
+- Custom refresh interval
+- Theme customization
+
+---
+
+## 📜 License
+MIT (see repository for details).
+
+---
+
+**Always run the latest version to get fixes and improvements.**
 
 
 
