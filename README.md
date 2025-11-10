@@ -4,6 +4,8 @@
 
 **Monix** is a lightweight, modern always‑on‑top desktop overlay for real‑time monitoring of key system resources.
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/O4O81NUMC7)
+
 ---
 
 ## 📦 Latest Release
